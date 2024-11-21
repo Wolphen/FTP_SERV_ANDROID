@@ -1,30 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="16dp">
 
-    <Button
-        android:id="@+id/btn_start_ftp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Démarrer le Serveur FTP" />
-
-    <Button
-        android:id="@+id/btn_stop_ftp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Arrêter le Serveur FTP"
-        android:layout_marginTop="16dp" />
-
     <TextView
         android:id="@+id/tv_status"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="Serveur FTP inactif"
-        android:textSize="16sp"
-        android:textColor="#FF0000"
-        android:gravity="center" />
+        android:text="État du serveur FTP"
+        android:textSize="18sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
 
+    <TextView
+        android:id="@+id/tv_ip_port"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Adresse IP et Port"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginBottom="16dp" />
 </LinearLayout>
