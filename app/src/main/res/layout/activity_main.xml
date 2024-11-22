@@ -1,25 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:gravity="center"
+    android:padding="16dp"
+    android:background="@drawable/background_gradient">
 
     <TextView
-        android:id="@+id/tv_status"
+        android:id="@+id/server_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="État du serveur FTP"
-        android:textSize="18sp"
-        android:textColor="@android:color/black"
+        android:text="Statut du serveur : Inconnu"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="16dp" />
 
     <TextView
-        android:id="@+id/tv_ip_port"
+        android:id="@+id/server_info_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Adresse IP et Port"
+        android:text="Adresse : En attente..."
         android:textSize="16sp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/white"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Démarrer le serveur"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white"
         android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/stop_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Arrêter le serveur"
+        android:backgroundTint="@color/purple_500"
+        android:textColor="@android:color/white" />
+
 </LinearLayout>

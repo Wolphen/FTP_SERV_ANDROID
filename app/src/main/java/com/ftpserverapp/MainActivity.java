@@ -5,55 +5,53 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
-    private TextView statusTextView;
-    private TextView ipPortTextView;
+    private TextView serverStatusText, serverInfoText;
+    private Button startButton, stopButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        statusTextView = findViewById(R.id.tv_status);
-        ipPortTextView = findViewById(R.id.tv_ip_port);
+        serverStatusText = findViewById(R.id.server_status);
+        serverInfoText = findViewById(R.id.server_info_text);
+        startButton = findViewById(R.id.start_button);
+        stopButton = findViewById(R.id.stop_button);
 
-        // Démarrer le Service FTP
-        Intent intent = new Intent(this, FTPService.class);
-        startService(intent);
+        startButton.setOnClickListener(v -> startService(new Intent(this, FTPService.class)));
+        stopButton.setOnClickListener(v -> stopService(new Intent(this, FTPService.class)));
 
-        // Mettre à jour l'état initial
-        statusTextView.setText("Démarrage du serveur FTP...");
-        ipPortTextView.setText("En attente d'adresse IP et de port...");
-
-        // Enregistrer le BroadcastReceiver pour recevoir des mises à jour du service
-        registerReceiver(ftpStatusReceiver, new IntentFilter("FTP_STATUS_UPDATE"), Context.RECEIVER_NOT_EXPORTED);
+        registerReceiver(ftpStatusReceiver, new IntentFilter("com.ftpserverapp.FTP_SERVER_STATUS"));
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        // Désenregistrer le BroadcastReceiver pour éviter les fuites de mémoire
-        unregisterReceiver(ftpStatusReceiver);
-    }
-
-    // BroadcastReceiver pour recevoir les mises à jour du service FTP
     private final BroadcastReceiver ftpStatusReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             String status = intent.getStringExtra("status");
-            String ipPort = intent.getStringExtra("ipPort");
+            String ipAddress = intent.getStringExtra("ipAddress");
 
-            if (status != null) {
-                statusTextView.setText(status);
-            }
-            if (ipPort != null) {
-                ipPortTextView.setText(ipPort);
+            if ("started".equals(status)) {
+                serverStatusText.setText("Serveur FTP démarré");
+                serverInfoText.setText("Adresse : ftp://" + ipAddress + ":2121");
+            } else if ("stopped".equals(status)) {
+                serverStatusText.setText("Serveur arrêté");
+                serverInfoText.setText("Adresse : En attente...");
+            } else {
+                serverStatusText.setText("Erreur : Serveur non disponible");
+                serverInfoText.setText("Adresse : N/A");
             }
         }
     };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        unregisterReceiver(ftpStatusReceiver);
+    }
 }
