@@ -1,0 +1,3 @@
+AUTOMATIQUE FTP SERVEUR LAUNCH ON BOOT AND CAN BE ON BACKGROUND
+
+Everyone is free to copy or modify it 
