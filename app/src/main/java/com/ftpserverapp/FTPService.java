@@ -50,7 +50,7 @@ public class FTPService extends Service {
             // Configurer un utilisateur anonyme
             BaseUser user = new BaseUser();
             user.setName("anonymous");
-            user.setHomeDirectory("/sdcard"); // Répertoire racine
+            user.setHomeDirectory("/sdcard/"); // Répertoire racine
             user.setAuthorities(Collections.singletonList(new org.apache.ftpserver.usermanager.impl.WritePermission()));
 
             // Ajouter le listener et l'utilisateur
